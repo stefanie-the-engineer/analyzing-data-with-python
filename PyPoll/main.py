@@ -3,15 +3,16 @@ import csv
 
 # this module reads in csv file, counts all votes, gets candidate names, prints percentage for each candidate and provides output to both the terminal and a text file
 
-# get the csv file and create output folder and output file
+# get the csv file and create output file
 this_folder = os.path.dirname(__file__)
 import_path = os.path.join(this_folder, "Resources", "election_data.csv")
 output_path = os.path.join(this_folder, "Output", "election_results.txt")
 
+# create lists that hold the data obtained from the csv
 votes = []
 candidates = {}
 
-# method to convert list to set to get unique candidates, 
+# method to convert list to set to get unique candidates, get and print vote counts for each candidate, print the winner of the election - all to the terminal
 def printToTerminalCandidatesWithVotes(votes = [], candidates = {}):
     
     # converts list to set to get all unique candidate names
@@ -58,14 +59,15 @@ def printToTerminalCandidatesWithVotes(votes = [], candidates = {}):
     print("Winner: " + candidatesWithVotes[index])
        
     print("----------------------------------------------")
-    
+
+# method to convert list to set to get unique candidates, get and print vote counts for each candidate, print the winner of the election - all to the text file    
 def printToTextFileCandidatesWithVotes(votes = [], candidates = {}, output_path = ""):
-    
-    # converts list to set to get all unique candidate names
-    candidates = {*votes}
     
     # create output file to write
     output_file = open(output_path, "w")
+    
+    # converts list to set to get all unique candidate names
+    candidates = {*votes}
     
     # list declaration and instantiation to store percentages for candidates
     percents = []
@@ -75,7 +77,7 @@ def printToTextFileCandidatesWithVotes(votes = [], candidates = {}, output_path 
     winner = ""
     count = 0
     
-    # print results to terminal
+    # print results to text file
     output_file.write("Election Results\n")
     output_file.write("----------------------------------------------\n")
     output_file.write("Total Votes: " + str(len(votes)) + "\n")
@@ -112,7 +114,7 @@ def printToTextFileCandidatesWithVotes(votes = [], candidates = {}, output_path 
 # reads in csv from resources folder
 with open(import_path, newline="") as csvfile:
 
-    # CSV reader specifies delimiter and variable that holds contents
+    # csv reader specifies delimiter and variable that holds contents
     csvreader = csv.reader(csvfile, delimiter=',')
 
     # Read the header row first (skip this step if there is now header)
