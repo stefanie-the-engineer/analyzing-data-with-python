@@ -1,4 +1,4 @@
-# python-challenge
+# Analyzing Excel Spreadsheet Using Python
 
 This repository consists of two different modules. Here we are required to read in CSV files, process the data to get the information we need and then print the results out to terminal and a text file.
 
