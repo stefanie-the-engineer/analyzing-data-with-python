@@ -25,6 +25,8 @@ def printToTerminalCandidatesWithVotes(votes = [], candidates = {}):
     # variable declarations and initializations 
     winner = ""
     count = 0
+    max = 0
+    index = 0
     
     # print results to terminal
     print("Election Results")
@@ -32,12 +34,11 @@ def printToTerminalCandidatesWithVotes(votes = [], candidates = {}):
     print("Total Votes: " + str(len(votes)))
     print("----------------------------------------------")
     
+    # get candidates and count the number of votes for each candidate
     for candidate in candidates:
         for vote in votes:
             if vote == candidate:
                 count = count + 1
-            else:
-                continue
         percents.append(count / len(votes))
         print(candidate + ": " + '{:.3%}'.format(count / len(votes)) + " (" + str(count) + ")")
         count = 0
@@ -45,8 +46,6 @@ def printToTerminalCandidatesWithVotes(votes = [], candidates = {}):
     print("----------------------------------------------")
     
     # get the winner of the election - uses list to iterate through percents, stores max and index of highest percent (index of highest percent will be index of candidate list to retrieve winner
-    max = 0
-    index = 0
     for i, percent in enumerate(percents):
         if percent > max:
             max = percent
@@ -76,6 +75,8 @@ def printToTextFileCandidatesWithVotes(votes = [], candidates = {}, output_path 
     # variable declarations and initializations 
     winner = ""
     count = 0
+    max = 0
+    index = 0
     
     # print results to text file
     output_file.write("Election Results\n")
@@ -83,12 +84,11 @@ def printToTextFileCandidatesWithVotes(votes = [], candidates = {}, output_path 
     output_file.write("Total Votes: " + str(len(votes)) + "\n")
     output_file.write("----------------------------------------------\n")
     
+    # get candidates and count the number of votes for each candidate
     for candidate in candidates:
         for vote in votes:
             if vote == candidate:
                 count = count + 1
-            else:
-                continue
         percents.append(count / len(votes))
         output_file.write(candidate + ": " + '{:.3%}'.format(count / len(votes)) + " (" + str(count) + ")\n")
         count = 0
@@ -96,8 +96,6 @@ def printToTextFileCandidatesWithVotes(votes = [], candidates = {}, output_path 
     output_file.write("----------------------------------------------\n")
     
     # get the winner of the election - uses list to iterate through percents, stores max and index of highest percent (index of highest percent will be index of candidate list to retrieve winner
-    max = 0
-    index = 0
     for i, percent in enumerate(percents):
         if percent > max:
             max = percent
@@ -112,7 +110,7 @@ def printToTextFileCandidatesWithVotes(votes = [], candidates = {}, output_path 
     output_file.write("----------------------------------------------")
 
 # reads in csv from resources folder
-with open(import_path, newline="") as csvfile:
+with open(import_path, newline='') as csvfile:
 
     # csv reader specifies delimiter and variable that holds contents
     csvreader = csv.reader(csvfile, delimiter=',')
@@ -127,5 +125,5 @@ with open(import_path, newline="") as csvfile:
 # print results to terminal
 printToTerminalCandidatesWithVotes(votes, candidates)
 
-# prints results to output text file
+# prints results to text file
 printToTextFileCandidatesWithVotes(votes, candidates, output_path)
